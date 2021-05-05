@@ -9,24 +9,11 @@ const DRAWS = document.querySelector("#draws");
 const NO_CONTESTS = document.querySelector("#no-contests");
 const ALERT = document.querySelector("#onSuccess");
 
-axios
-    .get("https://reqres.in/api/users")
-    .then((response)=>{
-        console.log(response);
-        for(let data of response.data.data){
-            printToScreen(data);
-        }
-    })
-    .catch((err) =>{
-        console.error(err);
-    });
-
-
 const printToScreen = (information) => {
     // <p> </p>
     const p = document.createElement("p");
     // Text: <firstname> <lastname> <email>
-    const text = document.createTextNode(`${information.first_name} ${information.last_name}, ${information.email}`)
+    const text = document.createTextNode(`${information.name} ${information.age} years old, ${information.wins}-${information.losses}-${information.draws} (${information.no_contests})`)
     // <p> <firstname> <lastname> <email> </p>
     p.appendChild(text);
 
@@ -60,6 +47,7 @@ const createUser = () => {
             console.log(resp);
             ALERT.setAttribute("class", "alert alert-success");
             ALERT.innerHTML = "User has been successfully created!";
+            printToScreen(obj);
             setTimeout( () => {
                 ALERT.removeAttribute("class");
                 ALERT.innerHTML = "";
@@ -67,14 +55,3 @@ const createUser = () => {
         })
         .catch((err) => console.error(err));
 }
-
-const PARAMS = new URLSearchParams(window.location.search);
-
-for(const val of PARAMS.values()){
-    console.log(val);
-}
-
-const id = PARAMS.get("id");
-const UNAME = PARAMS.get("name");
-
-alert(`The ID in the searchbar is: ${id}, NAME: ${UNAME}`);
