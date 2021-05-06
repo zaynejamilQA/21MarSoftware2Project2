@@ -44,6 +44,7 @@ public class MmaServiceDB implements MmaService {
 		fighter.setAge(newMma.getAge());
 		fighter.setName(newMma.getName());
 		fighter.setWins(newMma.getWins());
+		fighter.setLosses(newMma.getLosses());
 		fighter.setDraws(newMma.getDraws());
 		fighter.setNo_contests(newMma.getNo_contests());
 		return this.repo.save(fighter);
