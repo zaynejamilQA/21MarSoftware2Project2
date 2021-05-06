@@ -14,14 +14,7 @@
 <body class="all">
     <div class="container" id="primary">
         <div class="container" id="topBar">
-
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Enter a fighter
-            </button>
-
             <h1 class="text-center">MMA Fighter Database</h1>
-
-            <div class="alert" id="onSuccess"></div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -65,10 +58,18 @@
                 </div>
             </div>
         </div>
-        <div id="people"></div>
+        <div class="container" id="addFighter">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Enter a fighter
+            </button>
+        </div>
+        <div class="conatiner" id="display">
+            <div id="fighters"></div>
+        </div>
     </div>
+
     </div>
- 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous"></script>

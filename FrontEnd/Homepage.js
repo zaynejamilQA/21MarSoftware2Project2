@@ -1,6 +1,6 @@
 'use strict';
 
-const DIV = document.querySelector("#people");
+const DIV = document.querySelector("#fighters");
 const NAME = document.querySelector("#name");
 const AGE = document.querySelector("#age");
 const WINS = document.querySelector("#wins");
@@ -10,13 +10,15 @@ const NO_CONTESTS = document.querySelector("#no-contests");
 const ALERT = document.querySelector("#onSuccess");
 
 const printToScreen = (information) => {
-    // <p> </p>
     const p = document.createElement("p");
-    // Text: <firstname> <lastname> <email>
+    var edit = document.createElement("BUTTON");
+    var del = document.createElement("BUTTON");
+    edit.innerHTML = "Edit";
+    del.innerHTML = "Delete";
     const text = document.createTextNode(`${information.name} ${information.age} years old, ${information.wins}-${information.losses}-${information.draws} (${information.no_contests})`)
-    // <p> <firstname> <lastname> <email> </p>
     p.appendChild(text);
-
+    p.appendChild(edit);
+    p.appendChild(del);
     DIV.appendChild(p);
 }
 
@@ -31,7 +33,7 @@ const createUser = () => {
 
     console.log(`${NAME_VALUE}, ${AGE_VALUE} ${WINS_VALUE}-${LOSSES_VALUE}-${DRAWS_VALUE} (${NO_CONTESTS_VALUE})`);
 
-    // Create the object
+
     let obj = { 
         name: NAME_VALUE,
         age: AGE_VALUE,
@@ -45,8 +47,6 @@ const createUser = () => {
         .post("https://reqres.in/api/users", obj)
         .then((resp) => {
             console.log(resp);
-            ALERT.setAttribute("class", "alert alert-success");
-            ALERT.innerHTML = "User has been successfully created!";
             printToScreen(obj);
             setTimeout( () => {
                 ALERT.removeAttribute("class");
