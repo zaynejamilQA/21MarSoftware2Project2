@@ -7,12 +7,18 @@ const WINS = document.querySelector("#wins");
 const LOSSES = document.querySelector("#losses");
 const DRAWS = document.querySelector("#draws");
 const NO_CONTESTS = document.querySelector("#no-contests");
-const ALERT = document.querySelector("#onSuccess");
 
 const printToScreen = (information) => {
+    console.log(information);
     const p = document.createElement("p");
+    p.id = information.id;
     var edit = document.createElement("BUTTON");
+    edit.className = "btn btn-success edit";
     var del = document.createElement("BUTTON");
+    del.className = "btn btn-danger del";
+    del.onclick = ()=>{
+      deleteFighterInsert(information.id);  
+    }
     edit.innerHTML = "Edit";
     del.innerHTML = "Delete";
     const text = document.createTextNode(`${information.name} ${information.age} years old, ${information.wins}-${information.losses}-${information.draws} (${information.no_contests})`)
@@ -20,6 +26,17 @@ const printToScreen = (information) => {
     p.appendChild(edit);
     p.appendChild(del);
     DIV.appendChild(p);
+}
+
+const deleteFighterInsert=(id)=>{
+    axios.delete(`http://localhost:8080/remove/${id}`, {"Headers":{
+        "Access-Control-Allow-Origin":"*"
+    }})
+    .then((resp) => {
+        console.log(resp);
+        window.location.reload();
+    })
+    .catch((err) => console.error(err));
 }
 
 const createUser = () => {
@@ -44,14 +61,12 @@ const createUser = () => {
     };
 
     axios
-        .post("https://reqres.in/api/users", obj)
+        .post("http://localhost:8080/create", obj)
         .then((resp) => {
             console.log(resp);
-            printToScreen(obj);
-            setTimeout( () => {
-                ALERT.removeAttribute("class");
-                ALERT.innerHTML = "";
-            },3000);
+            printToScreen(resp.data);
         })
         .catch((err) => console.error(err));
 }
+
+// Axios get .. get all .then printtoscreen
