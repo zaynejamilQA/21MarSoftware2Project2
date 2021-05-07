@@ -8,6 +8,14 @@ const LOSSES = document.querySelector("#losses");
 const DRAWS = document.querySelector("#draws");
 const NO_CONTESTS = document.querySelector("#no-contests");
 
+const UDIV = document.querySelector("#update-fighters");
+const UNAME = document.querySelector("#update-name");
+const UAGE = document.querySelector("#update-age");
+const UWINS = document.querySelector("#update-wins");
+const ULOSSES = document.querySelector("#update-losses");
+const UDRAWS = document.querySelector("#update-draws");
+const UNO_CONTESTS = document.querySelector("#update-no-contests");
+
 const printToScreen = (information) => {
     console.log(information);
     const p = document.createElement("p");
@@ -16,9 +24,11 @@ const printToScreen = (information) => {
     edit.className = "btn btn-success edit";
     var del = document.createElement("BUTTON");
     del.className = "btn btn-danger del";
-    del.onclick = ()=>{
-      deleteFighterInsert(information.id);  
+    del.onclick = () => {
+        deleteFighterInsert(information.id);
     }
+    edit.setAttribute("data-bs-toggle","modal");
+    edit.setAttribute("data-bs-target","#updateAFighter")
     edit.innerHTML = "Edit";
     del.innerHTML = "Delete";
     const text = document.createTextNode(`${information.name} ${information.age} years old, ${information.wins}-${information.losses}-${information.draws} (${information.no_contests})`)
@@ -28,20 +38,54 @@ const printToScreen = (information) => {
     DIV.appendChild(p);
 }
 
-const deleteFighterInsert=(id)=>{
-    axios.delete(`http://localhost:8080/remove/${id}`, {"Headers":{
-        "Access-Control-Allow-Origin":"*"
-    }})
-    .then((resp) => {
-        console.log(resp);
-        window.location.reload();
+const deleteFighterInsert = (id) => {
+    axios.delete(`http://localhost:8080/remove/${id}`, {
+        "Headers": {
+            "Access-Control-Allow-Origin": "*"
+        }
     })
-    .catch((err) => console.error(err));
+        .then((resp) => {
+            console.log(resp);
+            window.location.reload();
+        })
+        .catch((err) => console.error(err));
+}
+
+const updateFighter = (id) => {
+    const UNAME_VALUE = UNAME.value;
+    const UAGE_VALUE = UAGE.value;
+    const UWINS_VALUE = UWINS.value;
+    const ULOSSES_VALUE = ULOSSES.value;
+    const UDRAWS_VALUE = UDRAWS.value;
+    const UNO_CONTESTS_VALUE = UNO_CONTESTS.value;
+
+    console.log(`${UNAME_VALUE}, ${UAGE_VALUE} ${UWINS_VALUE}-${ULOSSES_VALUE}-${UDRAWS_VALUE} (${UNO_CONTESTS_VALUE})`);
+
+
+    let obj = {
+        name: UNAME_VALUE,
+        age: UAGE_VALUE,
+        wins: UWINS_VALUE,
+        losses: ULOSSES_VALUE,
+        draws: UDRAWS_VALUE,
+        no_contests: UNO_CONTESTS_VALUE
+    };
+
+    axios.put(`http://localhost:8080/update/${id}`, {
+        "Headers": {
+            "Access-Control-Allow-Origin": "*"
+        }
+    })
+        .then((resp) => {
+            console.log(resp);
+            printToScreen(resp.data);
+        })
+        .catch((err) => console.error(err));
 }
 
 const createUser = () => {
 
-    const NAME_VALUE = NAME.value; 
+    const NAME_VALUE = NAME.value;
     const AGE_VALUE = AGE.value;
     const WINS_VALUE = WINS.value;
     const LOSSES_VALUE = LOSSES.value;
@@ -51,7 +95,7 @@ const createUser = () => {
     console.log(`${NAME_VALUE}, ${AGE_VALUE} ${WINS_VALUE}-${LOSSES_VALUE}-${DRAWS_VALUE} (${NO_CONTESTS_VALUE})`);
 
 
-    let obj = { 
+    let obj = {
         name: NAME_VALUE,
         age: AGE_VALUE,
         wins: WINS_VALUE,
@@ -61,7 +105,11 @@ const createUser = () => {
     };
 
     axios
-        .post("http://localhost:8080/create", obj)
+        .post("http://localhost:8080/create", obj, {
+            "Headers": {
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         .then((resp) => {
             console.log(resp);
             printToScreen(resp.data);
