@@ -2,17 +2,11 @@
     padding-top: 10px;
     padding-bottom: 10px;
     background-color:rgb(161, 0, 0);
-
 }
 
 #primary{
     background-color: rgb(151, 151, 151);
     padding-block-end: 100%;
-}
-
-#logo{
-    height: 100px;
-    padding-left: 375px;
 }
 
 .active{
@@ -31,3 +25,9 @@
     background-color: rgb(161, 0, 0);
 }
 
+.edit{
+    float: right;
+}
+.del{
+    float: right;
+}
