@@ -15,6 +15,7 @@ const UWINS = document.querySelector("#update-wins");
 const ULOSSES = document.querySelector("#update-losses");
 const UDRAWS = document.querySelector("#update-draws");
 const UNO_CONTESTS = document.querySelector("#update-no-contests");
+const UID = document.querySelector("#update-id");
 
 const printToScreen = (information) => {
     console.log(information);
@@ -27,8 +28,11 @@ const printToScreen = (information) => {
     del.onclick = () => {
         deleteFighterInsert(information.id);
     }
-    edit.setAttribute("data-bs-toggle","modal");
-    edit.setAttribute("data-bs-target","#updateAFighter")
+    edit.setAttribute("data-bs-toggle", "modal");
+    edit.setAttribute("data-bs-target", "#updateAFighter")
+    edit.onclick = () => {
+        editMethod(information.id);
+    }
     edit.innerHTML = "Edit";
     del.innerHTML = "Delete";
     const text = document.createTextNode(`${information.name} ${information.age} years old, ${information.wins}-${information.losses}-${information.draws} (${information.no_contests})`)
@@ -51,7 +55,20 @@ const deleteFighterInsert = (id) => {
         .catch((err) => console.error(err));
 }
 
-const updateFighter = (id) => {
+const editMethod = (id) => {
+    axios.get(`http://localhost:8080/getOne/${id}`)
+        .then((resp) => {
+            UNAME.value = resp.data.name;
+            UAGE.value = resp.data.age;
+            UWINS.value = resp.data.wins;
+            ULOSSES.value = resp.data.losses;
+            UDRAWS.value = resp.data.draws;
+            UNO_CONTESTS.value = resp.data.no_contests;
+            UID.value = resp.data.id;
+        })
+}
+const updateFighter = () => {
+    const UID_VALUE = UID.value;
     const UNAME_VALUE = UNAME.value;
     const UAGE_VALUE = UAGE.value;
     const UWINS_VALUE = UWINS.value;
@@ -60,7 +77,6 @@ const updateFighter = (id) => {
     const UNO_CONTESTS_VALUE = UNO_CONTESTS.value;
 
     console.log(`${UNAME_VALUE}, ${UAGE_VALUE} ${UWINS_VALUE}-${ULOSSES_VALUE}-${UDRAWS_VALUE} (${UNO_CONTESTS_VALUE})`);
-
 
     let obj = {
         name: UNAME_VALUE,
@@ -71,14 +87,14 @@ const updateFighter = (id) => {
         no_contests: UNO_CONTESTS_VALUE
     };
 
-    axios.put(`http://localhost:8080/update/${id}`, {
+    axios.put(`http://localhost:8080/update/${UID_VALUE}`, obj, {
         "Headers": {
             "Access-Control-Allow-Origin": "*"
         }
     })
         .then((resp) => {
             console.log(resp);
-            printToScreen(resp.data);
+            window.location.reload();
         })
         .catch((err) => console.error(err));
 }
@@ -118,3 +134,15 @@ const createUser = () => {
 }
 
 // Axios get .. get all .then printtoscreen
+axios
+    .get("http://localhost:8080/getAll", {
+        "Headers": {
+            "Access-Control-Allow-Origin": "*"
+        }
+    })
+    .then((resp) => {
+        console.log(resp);
+        for (let i = 0; i <= resp.data.length; i++)
+            printToScreen(resp.data[i]);
+    })
+    .catch((err) => console.error(err));
