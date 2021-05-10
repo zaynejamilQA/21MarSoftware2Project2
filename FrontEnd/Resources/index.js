@@ -41,7 +41,7 @@ const printToScreen = (information) => {
     p.appendChild(text);
     p.appendChild(edit);
     p.appendChild(del);
-    DIV.appendChild(p);
+    DIV.prepend(p);
 }
 
 const deleteFighterInsert = (id) => {
@@ -146,11 +146,14 @@ const searchFighterByName = () => {
         .then((resp) => {
             console.log(resp);
             //deleteFighterInsert(resp.data.id);
-            printToScreen(resp.data);
+            addSearchedFighter(resp.data);
         })
         .catch((err) => console.error(err));
 }
 
+const addSearchedFighter=(data)=>{
+    printToScreen(data);
+}
 
 // Axios get .. get all .then printtoscreen
 axios
