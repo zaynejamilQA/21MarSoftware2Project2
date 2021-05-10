@@ -145,14 +145,19 @@ const searchFighterByName = () => {
         })
         .then((resp) => {
             console.log(resp);
-            //deleteFighterInsert(resp.data.id);
             addSearchedFighter(resp.data);
         })
         .catch((err) => console.error(err));
 }
 
 const addSearchedFighter=(data)=>{
-    printToScreen(data);
+    NAME.value = data.name;
+    AGE.value = data.age;
+    WINS.value = data.wins;
+    LOSSES.value = data.losses;
+    DRAWS.value = data.draws;
+    NO_CONTESTS.value = data.no_contests;
+    alert(`${NAME_VALUE}, ${AGE_VALUE} ${WINS_VALUE}-${LOSSES_VALUE}-${DRAWS_VALUE} (${NO_CONTESTS_VALUE})`);
 }
 
 // Axios get .. get all .then printtoscreen
