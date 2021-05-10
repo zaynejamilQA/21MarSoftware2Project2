@@ -151,20 +151,20 @@ const searchFighterByName = () => {
 }
 
 const addSearchedFighter=(data)=>{
-    NAME.value = data.name;
-    AGE.value = data.age;
-    WINS.value = data.wins;
-    LOSSES.value = data.losses;
-    DRAWS.value = data.draws;
-    NO_CONTESTS.value = data.no_contests;
+    const NAME_VALUE = data.name;
+    const AGE_VALUE = data.age;
+    const WINS_VALUE = data.wins;
+    const LOSSES_VALUE = data.losses;
+    const DRAWS_VALUE = data.draws;
+    const NO_CONTESTS_VALUE = data.no_contests;
     alert(`${NAME_VALUE}, ${AGE_VALUE} ${WINS_VALUE}-${LOSSES_VALUE}-${DRAWS_VALUE} (${NO_CONTESTS_VALUE})`);
 }
 
-// Axios get .. get all .then printtoscreen
+{ 
 axios
-    .get("http://localhost:8080/getAll", {
-        "Headers": {
-            "Access-Control-Allow-Origin": "*"
+.get("http://localhost:8080/getAll", {
+    "Headers": {
+        "Access-Control-Allow-Origin": "*"
         }
     })
     .then((resp) => {
@@ -173,3 +173,4 @@ axios
             printToScreen(resp.data[i]);
     })
     .catch((err) => console.error(err));
+}
