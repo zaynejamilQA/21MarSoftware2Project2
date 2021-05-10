@@ -54,9 +54,9 @@ public class MmaControllerIntegrationTest {
 	@Test
 	void testGetAll() throws Exception {
 		final List<Mma> expected = new ArrayList<>();
-		expected.add(new Mma("Conor McGregor", 32, 23, 5, 0, 0));
+		expected.add(new Mma(1L, "Conor McGregor", 32, 23, 5, 0, 0));
 		final String expectedJSON = this.mapper.writeValueAsString(expected);
-		RequestBuilder mockRequest = get("/getAll").contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder mockRequest = get("/getAll");
 		ResultMatcher matchStatus = status().isOk();
 		ResultMatcher matchBody = content().json(expectedJSON);
 		this.mockMVC.perform(mockRequest).andExpect(matchBody).andExpect(matchStatus);
@@ -66,7 +66,7 @@ public class MmaControllerIntegrationTest {
 	void testGetOne() throws Exception{
 		final Mma expected = new Mma(1L, "Conor McGregor", 32, 23, 5, 0, 0);
 		final String expectedJSON = this.mapper.writeValueAsString(expected);
-		RequestBuilder mockRequest = get("/getOne/1").contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder mockRequest = get("/getOne/1");
 		ResultMatcher matchStatus = status().isOk();
 		ResultMatcher matchBody = content().json(expectedJSON);
 		this.mockMVC.perform(mockRequest).andExpect(matchBody).andExpect(matchStatus);
@@ -75,8 +75,9 @@ public class MmaControllerIntegrationTest {
 	@Test
 	void testGetByName() throws Exception{
 		final Mma expected = new Mma(1L, "Conor McGregor", 32, 23, 5, 0, 0);
+		final String space = " ";
 		final String expectedJSON = this.mapper.writeValueAsString(expected);
-		RequestBuilder mockRequest = get("/getByName/Conor%20McGregor").contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder mockRequest = get("/getByName/Conor"+space+"McGregor");
 		ResultMatcher matchStatus = status().isOk();
 		ResultMatcher matchBody = content().json(expectedJSON);
 		this.mockMVC.perform(mockRequest).andExpect(matchBody).andExpect(matchStatus);	
@@ -97,7 +98,7 @@ public class MmaControllerIntegrationTest {
 	void testUpdate() throws Exception{
 		final Mma expected = new Mma(1L, "Conor", 32, 23, 5, 0, 0);
 		final String expectedJSON = this.mapper.writeValueAsString(expected);
-		RequestBuilder mockRequest = put("/update/1").contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder mockRequest = put("/update/1").contentType(MediaType.APPLICATION_JSON).content(expectedJSON);
 		ResultMatcher matchStatus = status().isOk();
 		ResultMatcher matchBody = content().json(expectedJSON);
 		this.mockMVC.perform(mockRequest).andExpect(matchBody).andExpect(matchStatus);	
