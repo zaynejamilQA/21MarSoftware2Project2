@@ -23,6 +23,7 @@ const printToScreen = (information) => {
     console.log(information);
     const p = document.createElement("p");
     p.id = information.id;
+    p.className = "printedFighter";
     var edit = document.createElement("BUTTON");
     edit.className = "btn btn-success edit";
     var del = document.createElement("BUTTON");
