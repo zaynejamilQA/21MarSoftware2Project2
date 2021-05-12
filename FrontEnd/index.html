@@ -35,7 +35,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                            <button type="button" class="btn btn-success" id="confirmAdd" data-bs-dismiss="modal"
                                 onclick="createUser();">Save changes</button>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                            <button type="button" class="btn btn-success" id="confirmUpdate" data-bs-dismiss="modal"
                                 onclick="updateFighter();">Save changes</button>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                            <button type="button" class="btn btn-success" id="confirmSearch" data-bs-dismiss="modal"
                                 onclick="searchFighterByName();">Search fighter</button>
                         </div>
                     </div>
@@ -94,10 +94,10 @@
         </div>
         </br>
         <div class="container" id="fighterButtons">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAFighter">
+            <button type="button" class="btn btn-primary" id="addFighterButton" data-bs-toggle="modal" data-bs-target="#addAFighter">
                 Add a fighter
             </button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SearchAFighter">Search
+            <button type="button" class="btn btn-primary" id="searchFighterButton" data-bs-toggle="modal" data-bs-target="#SearchAFighter">Search
                 for a fighter</button>
         </div>
         </br>
