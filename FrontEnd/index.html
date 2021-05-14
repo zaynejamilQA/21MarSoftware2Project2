@@ -41,6 +41,35 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="updateAFighter" tabindex="-1" aria-labelledby="UpdateFighterLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="UpdateFighterLabel">Enter details</h4>
+                            <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" id="update-id" disabled />
+                            <input type="text" class="form-control" id="update-name" placeholder="NAME:" />
+                            <input type="text" class="form-control" id="update-age" placeholder="AGE:" />
+                            <br />
+                            <h5>Record:</h5>
+                            <input type="text" class="form-control" id="update-wins" placeholder="WINS:" />
+                            <input type="text" class="form-control" id="update-losses" placeholder="LOSSES:" />
+                            <input type="text" class="form-control" id="update-draws" placeholder="DRAWS:" />
+                            <input type="text" class="form-control" id="update-no-contests"
+                                placeholder="NO CONTESTS:" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                                onclick="updateFighter();">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="modal fade" id="SearchAFighter" tabindex="-1" aria-labelledby="SearchFighterLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -63,6 +92,7 @@
                 </div>
             </div>
         </div>
+        </br>
         <div class="container" id="fighterButtons">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAFighter">
                 Add a fighter
@@ -70,6 +100,7 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SearchAFighter">Search
                 for a fighter</button>
         </div>
+        </br>
         <div class="conatiner text-center" id="display">
             <div id="fighters"></div>
         </div>
