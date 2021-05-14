@@ -17,10 +17,13 @@ const UDRAWS = document.querySelector("#update-draws");
 const UNO_CONTESTS = document.querySelector("#update-no-contests");
 const UID = document.querySelector("#update-id");
 
+const SEARCHNAME = document.querySelector("#searchName");
+
 const printToScreen = (information) => {
     console.log(information);
     const p = document.createElement("p");
     p.id = information.id;
+    p.className = "printedFighter";
     var edit = document.createElement("BUTTON");
     edit.className = "btn btn-success edit";
     var del = document.createElement("BUTTON");
@@ -39,7 +42,7 @@ const printToScreen = (information) => {
     p.appendChild(text);
     p.appendChild(edit);
     p.appendChild(del);
-    DIV.appendChild(p);
+    DIV.prepend(p);
 }
 
 const deleteFighterInsert = (id) => {
@@ -133,11 +136,36 @@ const createUser = () => {
         .catch((err) => console.error(err));
 }
 
-// Axios get .. get all .then printtoscreen
+const searchFighterByName = () => {
+    const SEARCHNAME_VALUE = SEARCHNAME.value;
+    axios
+        .get(`http://localhost:8080/getByName/${SEARCHNAME_VALUE}`, {
+            "Headers": {
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+        .then((resp) => {
+            console.log(resp);
+            addSearchedFighter(resp.data);
+        })
+        .catch((err) => console.error(err));
+}
+
+const addSearchedFighter=(data)=>{
+    const NAME_VALUE = data.name;
+    const AGE_VALUE = data.age;
+    const WINS_VALUE = data.wins;
+    const LOSSES_VALUE = data.losses;
+    const DRAWS_VALUE = data.draws;
+    const NO_CONTESTS_VALUE = data.no_contests;
+    alert(`${NAME_VALUE}, ${AGE_VALUE} ${WINS_VALUE}-${LOSSES_VALUE}-${DRAWS_VALUE} (${NO_CONTESTS_VALUE})`);
+}
+
+{ 
 axios
-    .get("http://localhost:8080/getAll", {
-        "Headers": {
-            "Access-Control-Allow-Origin": "*"
+.get("http://localhost:8080/getAll", {
+    "Headers": {
+        "Access-Control-Allow-Origin": "*"
         }
     })
     .then((resp) => {
@@ -146,3 +174,4 @@ axios
             printToScreen(resp.data[i]);
     })
     .catch((err) => console.error(err));
+}
