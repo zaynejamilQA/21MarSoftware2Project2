@@ -9,6 +9,4 @@ import com.qa.mma.domain.Mma;
 public interface MmaRepo extends JpaRepository<Mma, Long>{
 	
 	Mma findByName(String name);
-	
-	// @Query(value = "INSERT ")
 }

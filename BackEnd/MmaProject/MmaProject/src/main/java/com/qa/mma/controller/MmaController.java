@@ -2,13 +2,11 @@ package com.qa.mma.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +17,7 @@ import com.qa.mma.domain.Mma;
 import com.qa.mma.service.MmaService;
 
 @RestController
+@CrossOrigin
 public class MmaController {
 
 	private MmaService service;
@@ -42,8 +41,8 @@ public class MmaController {
 		return ResponseEntity.ok(this.service.getById(id));
 	}
 
-	@GetMapping("/getByName")
-	public ResponseEntity<Mma> getFighterByName(@PathParam("name")  String name) {
+	@GetMapping("/getByName/{name}")
+	public ResponseEntity<Mma> getFighterByName(@PathVariable  String name) {
 		return ResponseEntity.ok(this.service.getFighterByName(name));
 	}
 
