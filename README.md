@@ -48,17 +48,13 @@ Install Java to run the application and MySQL (GCP is recommended), Eclipse and 
 
 1. Download the installer using the link - https://www.eclipse.org/downloads/packages/installer
 
-## Running the tests
-Coverage: %
+## Runningthe tests
+Coverage: 85.7%
 There are seperate tests for the front end web page and the back end java application.
 
 1. For the front end, unit and integration tests are used utilising Maven and Mockito to run tests for CRUD functionalities.
 
 2. For the back end, Selenium tests whether the elements present on the web page function as intended.
-
-### Unit Tests 
-### Integration Tests
-### Selenium Testing
 
 ## Built With
 
