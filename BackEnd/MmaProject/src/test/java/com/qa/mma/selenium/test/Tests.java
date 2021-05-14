@@ -1,5 +1,7 @@
 package com.qa.mma.selenium.test;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +10,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.PageFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -38,8 +41,12 @@ public class Tests {
 	}
 
 	@Test
-	public void enterSite() {
+	public void testAdd() {
 		driver.get(URL);
+		Homepage test = PageFactory.initElements(driver, Homepage.class);
+		test.add("Name", 2, 1, 0, 0, 0);
+		final String expected = "Name 2 years old, 1-0-0 (0)";
+		assertTrue(test.getTopFighter().getText().contains(expected));
 	}
 
 	@After
