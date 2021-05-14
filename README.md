@@ -68,9 +68,7 @@ We use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
 
-* **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
-
-* **Zayne Jamil** - *Final work* - [zaynejamil](https://github.com/zaynejamilQA)
+* **Zayne Jamil** - *Initial work* - [zaynejamil](https://github.com/zaynejamilQA)
 https://zaynejamilqa.atlassian.net/jira/software/projects/MIQR/boards/4/roadmap
 
 ## License
