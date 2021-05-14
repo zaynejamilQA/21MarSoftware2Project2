@@ -42,6 +42,8 @@ Install Java to run the application and MySQL (GCP is recommended), Eclipse and 
 
 1. Follow links (links) and install Selenium and add it along with dependencies into your Sprint Boot project in eclipse.
 
+2. Depending on your web browser, you will need to install the neccessary driver into the resources folder where your test files are located. [Chrome Driver](https://chromedriver.storage.googleapis.com/index.html) - Dependency for chrome web browser
+
 #### Installing Eclipse IDE
 
 1. Download the installer using the link - https://www.eclipse.org/downloads/packages/installer
