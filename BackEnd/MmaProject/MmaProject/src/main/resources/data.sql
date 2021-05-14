@@ -1,0 +1,1 @@
+INSERT INTO `mma`(`name`, `age`, `wins`, `losses`, `draws` , `no_contests`)VALUES('Conor McGregor', '32', '23', '5', '0', '0');
